@@ -12,6 +12,8 @@ class Directory extends Component {
 					img:
 						'https://factmag-images.s3.amazonaws.com/wp-content/uploads/2012/05/vinylmatter-main.jpg',
 					id: 1,
+					linkUrl: 'vinyl'
+
 					// size: 'large'
 				},
 				{
@@ -20,6 +22,7 @@ class Directory extends Component {
 						'https://factmag-images.s3.amazonaws.com/wp-content/uploads/2012/05/vinylmatter-main.jpg',
 					id: 2,
 					// size: 'large'
+					linkUrl: 'cd'
 				},
 				{
 					title: `INSTR`,
@@ -27,6 +30,7 @@ class Directory extends Component {
 						'https://factmag-images.s3.amazonaws.com/wp-content/uploads/2012/05/vinylmatter-main.jpg',
 					id: 3,
 					// size: 'large'
+					linkUrl: 'instr'
                 },
                 {
 					title: `INSTR`,
@@ -34,6 +38,7 @@ class Directory extends Component {
 						'https://factmag-images.s3.amazonaws.com/wp-content/uploads/2012/05/vinylmatter-main.jpg',
 					id: 4,
 					size: 'large'
+					
 				}
 			]
 		};
@@ -44,8 +49,8 @@ class Directory extends Component {
 		return (
 			
                 <div className='directory-menu'>
-					{this.state.sections.map(({ title, img, id, size }) =>
-						<MenuItem key={id} title={title} imgURL={img} size={size} />
+					{this.state.sections.map(({ id, ...otherSectionProps }) =>
+						<MenuItem key={id} {...otherSectionProps} />
 					)}
 				</div>
 			
