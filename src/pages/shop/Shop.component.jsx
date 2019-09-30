@@ -10,6 +10,7 @@ export class ShopPage extends Component {
             collections: SHOP_DATA
         }
     }
+  
     render() {
         const { collections } =this.state
           
