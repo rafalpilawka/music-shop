@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/logoshop.svg';
 import { auth } from '../../firebse/firebase.utils';
 import { connect } from 'react-redux'
+import { createStructuredSelector} from 'reselect'
 import CartIcon from '../cartIcon/cartIcon.component';
 import CartDropdown from '../cartDropdown/cartDropdown.component'
+import { selectCartHidden } from '../../redux/cart/cart.selector'
+import { selectCurrentUser } from '../../redux/user/user.selector'
 
 const Header = ({ currentUser, hidden}) => {
 	return (
@@ -41,9 +44,11 @@ const Header = ({ currentUser, hidden}) => {
 	);
 };
 
-const mapStateToProps=({user:{currentUser}, cart:{hidden}})=>({
-	currentUser: currentUser,
-	hidden: hidden,
+const mapStateToProps=createStructuredSelector({ // INSTEAD OF USING STATE AND ARROW FUNCTION WE CAN USE CSSELETOR FUNTCION WITH PASSED STATE FROM CONNECT
+
+	//USE CREATE STRUCTURED SELECTOR
+	currentUser: selectCurrentUser,
+	hidden: selectCartHidden
 })
 
 const mapdispatchToProps=state=>{
