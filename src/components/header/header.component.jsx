@@ -51,8 +51,6 @@ const mapStateToProps=createStructuredSelector({ // INSTEAD OF USING STATE AND A
 	hidden: selectCartHidden
 })
 
-const mapdispatchToProps=state=>{
-	return null
-}
 
-export default connect(mapStateToProps, mapdispatchToProps)(Header);
+
+export default connect(mapStateToProps, null)(Header);
