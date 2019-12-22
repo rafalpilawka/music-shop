@@ -12,11 +12,8 @@ import { createStructuredSelector } from 'reselect'
 import { selectCurrentUser } from './redux/user/user.selector'
 import Checkout from './pages/checkout/checkout.component'
 
-
-
 class App extends React.Component {
 	
-
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
@@ -53,7 +50,7 @@ class App extends React.Component {
 				<Switch>
 					<Route exact path="/" component={HomePage} />
 					<Route exact path="/shop" component={ShopPage} />
-					<Route exact path="/signIn" render={()=>this.props.currentUser ? (<Redirect to='./'/>) :(<SignInAndSignUp/>) } />
+					<Route exact path="/signIn" render={()=> this.props.currentUser ? (<Redirect to='./'/>) : <SignInAndSignUp/> } />
 					<Route exact path="/checkout" component={Checkout} />
 				</Switch>
 
@@ -62,9 +59,11 @@ class App extends React.Component {
 		);
 	}
 }
+
 const mapStateToProps = createStructuredSelector({
   currentUser : selectCurrentUser
 })
+
 const mapDispatchToProps= dispatch =>({
   setCurrentUser: (user) => dispatch(setCurrentUser(user))
 })

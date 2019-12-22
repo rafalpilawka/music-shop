@@ -30,6 +30,8 @@ export const selectCartTotal = createSelector(
 )
 
 
+
+
 //PATTERN FOR createSelector(
 //     selector // one or more
 //     ()=> transformer function
