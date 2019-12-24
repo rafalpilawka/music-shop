@@ -43,7 +43,6 @@ const directoryReducer=( state = INITIAL_STATE , action )=>{
             ...state
         }
     }
-
 }
 
 export default directoryReducer

@@ -11,12 +11,14 @@
   right: 40px;
   z-index: 5;
 
+
   .empty-message {
     font-size: 15px;
     margin: 50px auto;
   }
 
   .cart-items {
+    position: relative;
     height: 240px;
     display: flex;
     flex-direction: column;

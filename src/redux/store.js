@@ -4,10 +4,10 @@ import { persistStore } from 'redux-persist'
 
 import rootReducer from './root-reducer'
 
-const middlewares = [logger];
+const middlewares = [];
 
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
-//after reloading page store is store persist 
+//after reloading page store is persisted
 
 export const persistor = persistStore( store );
 

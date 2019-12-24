@@ -22,7 +22,6 @@ class App extends React.Component {
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 			if (userAuth) {
 				const userRef = await createUserProfileDocument(userAuth);
-
 				userRef.onSnapshot(snapshot => {
 					setCurrentUser({
 						currentUser: {
@@ -38,23 +37,20 @@ class App extends React.Component {
 	}
 
 	componentWillUnmount() {
-
     //unsubscribe from auth listener for avoid of memory leaks
 		this.unsubscribeFromAuth();
 	}
-
 	render() {
 		return (
 			<div className="App">
 				<Header/>
 				<Switch>
 					<Route exact path="/" component={HomePage} />
-					<Route exact path="/shop" component={ShopPage} />
+					<Route path="/shop" component={ShopPage} />
+					{/* IF WE NEED TO USE SUBROUTES_ WE NEED TO DEL EXACT_ AFTER RENDERING ROUTER UNMOUNT MATCH */}
 					<Route exact path="/signIn" render={()=> this.props.currentUser ? (<Redirect to='./'/>) : <SignInAndSignUp/> } />
 					<Route exact path="/checkout" component={Checkout} />
 				</Switch>
-
-				{/* <HomePage></HomePage> */}
 			</div>
 		);
 	}
