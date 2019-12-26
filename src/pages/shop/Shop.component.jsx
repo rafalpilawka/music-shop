@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
 import {Route } from 'react-router-dom'
-import CategoryPage from '../category/category.component'
+import CollectionPage from '../collection/collection.component'
 
 const ShopPage = ({ match }) => {
    //match from Route + form app.js
@@ -9,7 +9,7 @@ const ShopPage = ({ match }) => {
         return (
             <div className='shop-page'>
                <Route exact path={`${match.path}`} component={CollectionsOverview} />
-               <Route path={`${match.path}/:categoryId`} component={CategoryPage} />
+               <Route path={`${match.path}/:categoryId`} component={CollectionPage} />
             </div>
         )
 }
