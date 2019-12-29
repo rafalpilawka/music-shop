@@ -1,6 +1,6 @@
 import React from 'react';
 import './collections.overview.styles.scss'
-import { useSelector , useDispatch} from 'react-redux'
+import { useSelector } from 'react-redux'
 import PreviewCollection from '../preview-collection/preview-collection.component'
 import { selectCollectionsForPreview } from '../../redux/shop/shop-selector'
 
