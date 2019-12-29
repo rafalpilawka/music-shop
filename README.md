@@ -1,3 +1,5 @@
+React application based on Udemy course - "Complete React Development 2020" by Andrei Neagoie, Yihua Zhang with some retouchesfor Redux. 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
