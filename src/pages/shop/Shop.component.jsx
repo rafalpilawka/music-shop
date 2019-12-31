@@ -27,6 +27,7 @@ const ShopPage = props => {
 			dispatch(updateCollection(collectionMap));
 			setLoading(false);
 		});
+		return () => unsubscribeFromSnapshot() 
 	}, []);
 
 	return (
