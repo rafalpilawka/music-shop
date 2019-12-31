@@ -1,29 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux';
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
-import { firestore, convertCollectionsSnapshotToMap } from '../../firebse/firebase.utils'
-import { updateCollection } from '../../redux/shop/shop-actions'
+import {
+	firestore,
+	convertCollectionsSnapshotToMap
+} from '../../firebse/firebase.utils';
+import { updateCollection } from '../../redux/shop/shop-actions';
+import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
-const ShopPage = ({ match }) => {
+const CollectionOvewrviewWithSpinner = WithSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+
+const ShopPage = props => {
 	//match from Route + form app.js
-	const unsubscribeFromSnapshot =null
-	const dispatch = useDispatch()
-
-	useEffect(()=>{
-		const collectionRef = firestore.collection('collections')
-		collectionRef.onSnapshot(async snapshot=>{
-			const collectionMap = convertCollectionsSnapshotToMap(snapshot)
-			console.log(collectionMap)
-			dispatch(updateCollection(collectionMap))
-		})
-	},[])
+	const [loading, setLoading] = useState(true);
+	let unsubscribeFromSnapshot = null;
+	const dispatch = useDispatch();
+	const { match } = props;
 	
+	useEffect(() => {
+		const collectionRef = firestore.collection('collections');
+		unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+			const collectionMap = convertCollectionsSnapshotToMap(snapshot);
+			dispatch(updateCollection(collectionMap));
+			setLoading(false);
+		});
+	}, []);
+
 	return (
 		<div className="shop-page">
-			<Route exact path={`${match.path}`} component={CollectionsOverview} />
-			<Route path={`${match.path}/:categoryId`} component={CollectionPage} />
+			<Route
+				exact
+				path={`${match.path}`}
+				render={props =>
+					<CollectionOvewrviewWithSpinner isLoading={loading} {...props} />}
+			/>
+			<Route
+				path={`${match.path}/:categoryId`}
+				render={props =>
+					<CollectionPageWithSpinner isLoading={loading} {...props} />}
+			/>
 		</div>
 	);
 };
