@@ -20,26 +20,22 @@ const Header = () => {
 
 	return (
 		<HeaderContainer>
-			<LogoContainer to="/">
-				<Logo />
+			<LogoContainer to='/'>
+				<Logo className='logo' />
 			</LogoContainer>
 			<OptionsContainer>
-				<OptionLink to="/shop">
-					SHOP
-				</OptionLink>
-				<OptionLink to="/shop">
-					CONTACT
-				</OptionLink>
-				{currentUser
-					? <OptionLink as="div" onClick={() => auth.signOut()}>
-							SIGN OUT
-						</OptionLink>
-					: <OptionLink to="/signIn">
-							SIGNIN
-						</OptionLink>}
+				<OptionLink to='/shop'>SHOP</OptionLink>
+				<OptionLink to='/shop'>CONTACT</OptionLink>
+				{currentUser ? (
+					<OptionLink as='div' onClick={() => auth.signOut()}>
+						SIGN OUT
+        </OptionLink>
+				) : (
+						<OptionLink to='/signin'>SIGN IN</OptionLink>
+					)}
 				<CartIcon />
 			</OptionsContainer>
-			{hidden ? <CartDropdown /> : null}
+			{hidden ? null : <CartDropdown />}
 		</HeaderContainer>
 	);
 };

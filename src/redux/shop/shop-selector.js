@@ -19,3 +19,12 @@ export const selectCollection = collectionUrlParam =>
     collections => (collections ? collections[collectionUrlParam] : null)
 )
 // creating array  for mapping in collection preview
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  shop=> shop.isFetching
+)
+
+export const selectIsCollectionLoading = createSelector(
+  [selectShop],
+  shop => !!shop.collections
+)
