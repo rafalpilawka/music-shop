@@ -14,3 +14,10 @@ const WithSpinner = WrappedComponent => ({isLoading, ...otherProps}) =>{
 }
 
 export default WithSpinner
+
+ 
+{/* CONTAINER PATTERN
+CONST COLLECTIONOVERVIEWCONTAINER = COMPOSE(
+  connect(mapStateToProps),
+  WithSpinner
+)(CollectionOverview)  */}

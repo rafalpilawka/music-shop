@@ -4,10 +4,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
 import {selectIsCollectionFetching, selectIsCollectionLoading} from '../../redux/shop/shop-selector'
-import {
-	firestore,
-	convertCollectionsSnapshotToMap
-} from '../../firebse/firebase.utils';
+
 import { fetchCollectionStartAsync } from '../../redux/shop/shop-actions';
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
@@ -23,7 +20,7 @@ const ShopPage = props => {
 	
 	useEffect(() => {
 		dispatch(fetchCollectionStartAsync())
-	},[]);
+	},[dispatch]);
 
 	return (
 		<div className="shop-page">

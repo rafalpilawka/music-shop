@@ -7,7 +7,6 @@ import {
     NameContainer,
     PriceContainer
 } from './collection-item.styles';
-import CustomButton from '../customButton/customButton.component'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../../redux/cart/cart-actions'
 
