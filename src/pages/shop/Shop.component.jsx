@@ -5,7 +5,7 @@ import CollectionsOverview from '../../components/collections-overview/collectio
 import CollectionPage from '../collection/collection.component';
 import {selectIsCollectionFetching, selectIsCollectionLoading} from '../../redux/shop/shop-selector'
 
-import { fetchCollectionStartAsync } from '../../redux/shop/shop-actions';
+import { fetchCollectionStart } from '../../redux/shop/shop-actions';
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
 const CollectionOvewrviewWithSpinner = WithSpinner(CollectionsOverview);
@@ -19,7 +19,7 @@ const ShopPage = props => {
 	const { match } = props;
 	
 	useEffect(() => {
-		dispatch(fetchCollectionStartAsync())
+		dispatch(fetchCollectionStart())
 	},[dispatch]);
 
 	return (

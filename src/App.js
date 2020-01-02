@@ -19,21 +19,21 @@ class App extends React.Component {
 	componentDidMount() {
 		const { setCurrentUser} = this.props;
 		//AFTER WE RUNNING APP AND COMPONENT IS MOUNTED -  CONNECTION W FIREBASE THROUGH AUTH IS PERMANENTLY OPEN - WE CAN GET AUTH.USER INFORMATION
-		this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-			if (userAuth) {
-				const userRef = await createUserProfileDocument(userAuth);
-				userRef.onSnapshot(snapshot => {
-					setCurrentUser({
-						currentUser: {
-							id: snapshot.id,
-							...snapshot.data()
-						}
-					});
-				});
-			} else {
-				setCurrentUser(userAuth);
-			}
-		});
+		// this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+		// 	if (userAuth) {
+		// 		const userRef = await createUserProfileDocument(userAuth);
+		// 		userRef.onSnapshot(snapshot => {
+		// 			setCurrentUser({
+		// 				currentUser: {
+		// 					id: snapshot.id,
+		// 					...snapshot.data()
+		// 				}
+		// 			});
+		// 		});
+		// 	} else {
+		// 		setCurrentUser(userAuth);
+		// 	}
+		// });
 	}
 
 	componentWillUnmount() {

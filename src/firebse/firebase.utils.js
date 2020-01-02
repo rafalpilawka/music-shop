@@ -37,6 +37,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 firebase.initializeApp(config);
 
+//SENDING DATA TO FIREBASE
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
 	const collectionRef = firestore.collection(collectionKey)
 	console.log(objectsToAdd)
@@ -68,11 +69,11 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({
 	prompt: 'select_account'
 });
 // provider.setCustomParameters({ prompt : 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+// export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
