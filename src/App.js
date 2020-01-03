@@ -5,9 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import ShopPage from './pages/shop/Shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/signInSignUp/signInSignUp.component';
-import { auth, createUserProfileDocument } from './firebse/firebase.utils';
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user-action';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 import Checkout from './pages/checkout/checkout.component';
@@ -17,7 +15,7 @@ class App extends React.Component {
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
-		const { setCurrentUser} = this.props;
+	
 		//AFTER WE RUNNING APP AND COMPONENT IS MOUNTED -  CONNECTION W FIREBASE THROUGH AUTH IS PERMANENTLY OPEN - WE CAN GET AUTH.USER INFORMATION
 		// this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 		// 	if (userAuth) {
@@ -67,8 +65,5 @@ const mapStateToProps = createStructuredSelector({
 	currentUser: selectCurrentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-	setCurrentUser: user => dispatch(setCurrentUser(user))
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
