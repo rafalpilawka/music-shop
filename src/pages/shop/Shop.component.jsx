@@ -14,7 +14,6 @@ const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 const ShopPage = props => {
 	//match from Route + form app.js
 	const dispatch = useDispatch();
-	const isFetching = useSelector(selectIsCollectionFetching)
 	const isLoaded = useSelector(selectIsCollectionLoading)
 	const { match } = props;
 	
