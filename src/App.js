@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import HomePage from './pages/homepage/HomePage.component';
 import { Route, Switch, Redirect } from 'react-router-dom';
@@ -12,12 +12,14 @@ import Checkout from './pages/checkout/checkout.component';
 import {checkUserSession} from './redux/user/user-action'
 // import { selectCollectionsForPreview } from './redux/shop/shop-selector'
 
-class App extends React.Component {
+const App = ({checkUserSession, currentUser}) => {
 	// unsubscribeFromAuth = null;
-
-	componentDidMount() {
-		const {checkUserSession} = this.props;
+	useEffect(()=>{
 		checkUserSession()
+	},[checkUserSession])
+	// componentDidMount() {
+	// 	const {checkUserSession} = this.props;
+	// 	checkUserSession()
 		//AFTER WE RUNNING APP AND COMPONENT IS MOUNTED -  CONNECTION W FIREBASE THROUGH AUTH IS PERMANENTLY OPEN - WE CAN GET AUTH.USER INFORMATION
 		// this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 		// 	if (userAuth) {
@@ -34,13 +36,12 @@ class App extends React.Component {
 		// 		setCurrentUser(userAuth);
 		// 	}
 		// });
-	}
-
-	componentWillUnmount() {
+	// }
+	// componentWillUnmount() {
 		//unsubscribe from auth listener for avoiding of memory leaks
 		// this.unsubscribeFromAuth();
-	}
-	render() {
+	// }
+
 		return (
 			<div className="App">
 				<Header />
@@ -52,7 +53,7 @@ class App extends React.Component {
 						exact
 						path="/signIn"
 						render={() =>
-							this.props.currentUser
+							currentUser
 							? <Redirect to="./" />
 							: <SignInAndSignUp />}
 					/>
@@ -60,8 +61,7 @@ class App extends React.Component {
 				</Switch>
 			</div>
 		);
-	}
-}
+};
 
 const mapStateToProps = createStructuredSelector({
 	currentUser: selectCurrentUser,

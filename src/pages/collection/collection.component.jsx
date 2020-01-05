@@ -7,10 +7,21 @@ import {
 import CollectionItem from '../../components/collection-item/collection.item.component';
 import { useSelector } from 'react-redux';
 import { selectCollection } from '../../redux/shop/shop-selector';
+import { firestore } from '../../firebse/firebase.utils';
 
 const CollectionPage = ({ match }) => {
 	const collection = useSelector((state)=>selectCollection(match.params.categoryId)(state))
 	const { title, items } = collection;
+	//CLEAN UP SUBSCRIPTION
+	React.useEffect(()=>{
+		console.log('Im subscribing');
+		const unsubscribeFromCollections = firestore.collection('collections').onSnapshot(snapshot=>console.log(snapshot));
+		return ()=>{
+			console.log('unsubscribing');
+			unsubscribeFromCollections()
+		}
+	},[])
+	//
 	return (
 		<CollectionPageContainer>
 			<CollectionTitle>{title}</CollectionTitle>
@@ -22,4 +33,3 @@ const CollectionPage = ({ match }) => {
 };
 
 export default CollectionPage
-
