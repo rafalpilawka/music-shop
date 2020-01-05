@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormInput from '../formInput/formInput.component';
 import CustomButton from '../customButton/customButton.component';
-import { auth, createUserProfileDocument } from '../../firebse/firebase.utils';
+import { signUpStart } from '../../redux/user/user-action'
 import './signUp.styles.scss';
+import { useDispatch, connect } from 'react-redux'
 
 class SignUpComponent extends React.Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ class SignUpComponent extends React.Component {
 			password: '',
 			confirmPassword: ''
 		};
-	}
+	};
 	
 	handleSubmit = async event => {
 		event.preventDefault();
@@ -23,24 +24,26 @@ class SignUpComponent extends React.Component {
 			alert(`passwords don't match`);
 			return;
 		}
+		const {signUpStart} =this.props;
+		signUpStart({displayName, email, password});
 		//ASYNC ACTION FOR CREATING USER ON DB
-		try {
+		// try {
 			// FOR CREATING ACCOUNT WITH AUTH
-			const { user } = await auth.createUserWithEmailAndPassword(
-				email,
-				password
-			);
+			// const { user } = await auth.createUserWithEmailAndPassword(
+			// 	email,
+			// 	password
+			// );
 			//AWAIT FOR FIRESTORE FOR CREATE PROFILE WITH RECEIVED DATA FROM AUTH
-			await createUserProfileDocument(user, { displayName });
-			this.setState({
-				displayName: '',
-				email: '',
-				password: '',
-				confirmPassword: ''
-			});
-		} catch (error) {
-			console.log(error);
-		}
+			// await createUserProfileDocument(user, { displayName });
+			// this.setState({
+			// 	displayName: '',
+			// 	email: '',
+			// 	password: '',
+			// 	confirmPassword: ''
+			// });
+		// } catch (error) {
+		// 	console.log(error);
+		// }
 	};
 
 	handleChange = event => {
@@ -96,4 +99,8 @@ class SignUpComponent extends React.Component {
 	}
 }
 
-export default SignUpComponent;
+const mapDispatchToProps = dispatch =>({
+	signUpStart: (userCredentials)=>dispatch(signUpStart(userCredentials))
+})
+
+export default connect(null, mapDispatchToProps)(SignUpComponent);
